@@ -1,18 +1,28 @@
 NAME = push_swap
 
-SRCS = push_swap.c stack_operation.c operation.c \
-       operation2.c operation3.c utils.c ranking.c \
-       radix_sort.c small_sort.c
-
-OBJS = $(SRCS:.c=.o)
-
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
+
+SRCS = main.c \
+       parser.c \
+       stack_utils.c \
+       operation_a.c \
+       operation_b.c \
+       operation_both.c \
+       indexing.c \
+       sort_small.c \
+       radix_sort.c \
+       utils.c
+
+OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+
+%.o: %.c push_swap.h
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)

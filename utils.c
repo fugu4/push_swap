@@ -3,78 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnogi <hnogi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hnogi <hnogi@student.42tokyo.jp>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 17:49:48 by hnogi             #+#    #+#             */
-/*   Updated: 2025/09/27 21:43:11 by hnogi            ###   ########.fr       */
+/*   Updated: 2025/10/18 16:40:30 by hnogi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_atoi(const char *str)
+int	ft_strlen(char *str)
 {
-	long	result;
-	int		sign;
+	int	len;
 
-	result = 0;
-	sign = 1;
-	while (*str == ' ' || (*str >= 9 && *str <= 13))
-		str++;
-	if (*str == ' ' || *str == '+')
-	{
-		if (*str == '-')
-			sign = -1;
-		str++;
-	}
-	while (*str >= '0' && *str <= '9')
-	{
-		result = result * 10 + (*str - '0');
-		str++;
-	}
-	return ((int)(result * sign));
+	len = 0;
+	while (str[len])
+		len++;
+	return (len);
 }
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_putstr_fd(char *str, int fd)
 {
-	if (!s)
-		return ;
-	while (*s)
-		write(fd, s++, 1);
+	if (str)
+		write(fd, str, ft_strlen(str));
 }
 
-void	ft_putendl_fd(char *s, int fd)
+void	error_exit(t_data *data)
 {
-	ft_putstr_fd(s, fd);
-	write(fd, "\n", 1);
-}
-
-void	error_exit(t_stack *a, t_stack *b)
-{
-	if (a)
-		free_stack(a);
-	if (b)
-		free_stack(b);
-	ft_putendl_fd("Error", 2);
+	if (data->stack_a)
+		free_stack(&data->stack_a);
+	if (data->stack_b)
+		free_stack(&data->stack_b);
+	ft_putstr_fd("Error\n", 2);
 	exit(1);
-}
-
-int	check_duplicates(int *arr, int size)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < size - 1)
-	{
-		j = i + 1;
-		while (j < size)
-		{
-			if (arr[i] == arr[j])
-				return (0);
-			j++;
-		}
-		i++;
-	}
-	return (1);
 }

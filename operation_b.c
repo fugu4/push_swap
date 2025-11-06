@@ -12,46 +12,67 @@
 
 #include "push_swap.h"
 
-void	ra(t_stack *a)
+void	sb(t_data *data)
 {
-	t_node	*first;
-	t_node	*last;
+	t_stack	*first;
+	t_stack	*second;
 
-	if (!a || a->size < 2)
+	if (!data->stack_b || !data->stack_b->next)
 		return ;
-	first = a->top;
-	a->top = first->next;
-	a->top->prev = NULL;
-	last = a->top;
+	first = data->stack_b;
+	second = data->stack_b->next;
+	first->next = second->next;
+	second->next = first;
+	data->stack_b = second;
+	write(1, "sb\n", 3);
+}
+
+void	pb(t_data *data)
+{
+	t_stack	*temp;
+
+	if (!data->stack_a)
+		return ;
+	temp = data->stack_a;
+	data->stack_a = data->stack_a->next;
+	temp->next = data->stack_b;
+	data->stack_b = temp;
+	write(1, "pb\n", 3);
+}
+
+void	rb(t_data *data)
+{
+	t_stack	*first;
+	t_stack	*last;
+
+	if (!data->stack_b || !data->stack_b->next)
+		return ;
+	first = data->stack_b;
+	data->stack_b = data->stack_b->next;
+	last = data->stack_b;
 	while (last->next)
 		last = last->next;
 	last->next = first;
-	first->prev = last;
 	first->next = NULL;
-	ft_putendl_fd("ra", 1);
+	write(1, "rb\n", 3);
 }
 
-void	rb(t_stack *b)
+void	rrb(t_data *data)
 {
-	t_node	*first;
-	t_node	*last;
+	t_stack	*last;
+	t_stack	*second_last;
 
-	if (!b || b->size < 2)
+	if (!data->stack_b || !data->stack_b->next)
 		return ;
-	first = b->top;
-	b->top = first->next;
-	b->top->prev = NULL;
-	last = b->top;
+	last = data->stack_b;
+	second_last = NULL;
 	while (last->next)
+	{
+		second_last = last;
 		last = last->next;
-	last->next = first;
-	first->prev = last;
-	first->next = NULL;
-	ft_putendl_fd("rb", 1);
-}
-
-void	rr(t_stack *a, t_stack *b)
-{
-	ra(a);
-	rb(b);
+	}
+	second_last->next = NULL;
+	last->next = data->stack_b;
+	data->stack_b = last;
+	write(1, "rrb\n", 4);
 }
