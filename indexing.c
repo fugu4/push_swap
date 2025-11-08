@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   indexing.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hnogi <hnogi@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/08 16:48:26 by hnogi             #+#    #+#             */
+/*   Updated: 2025/11/08 16:48:27 by hnogi            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	get_min_value(t_stack *stack)
@@ -15,20 +27,6 @@ int	get_min_value(t_stack *stack)
 	}
 	return (min);
 }
-
-// static int	count_smaller_values(t_stack *stack, int value)
-// {
-// 	int	count;
-
-// 	count = 0;
-// 	while (stack)
-// 	{
-// 		if (stack->value < value)
-// 			count++;
-// 		stack = stack->next;
-// 	}
-// 	return (count);
-// }
 
 void	index_stack(t_stack *stack)
 {

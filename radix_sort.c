@@ -6,7 +6,7 @@
 /*   By: hnogi <hnogi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 18:31:53 by hnogi             #+#    #+#             */
-/*   Updated: 2025/09/27 18:31:56 by hnogi            ###   ########.fr       */
+/*   Updated: 2025/11/08 16:49:24 by hnogi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ void	radix_sort(t_data *data)
 	current_bit = 0;
 	while (current_bit < max_bits)
 	{
-		// if (is_sorted(data->stack_a))
-		// 	return ;
 		radix_sort_bit(data, current_bit, data->size);
 		current_bit++;
 	}
